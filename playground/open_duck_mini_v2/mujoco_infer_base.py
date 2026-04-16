@@ -1,14 +1,26 @@
+import glob
+import os
 import mujoco
 import numpy as np
 from etils import epath
-from playground.open_duck_mini_v2 import base
+
+
+def _get_assets_no_jax():
+    """Read XML and asset files without importing JAX (avoids CUDA/GLFW conflict)."""
+    assets = {}
+    xmls_dir = os.path.join(os.path.dirname(__file__), "xmls")
+    for pattern in ("*.xml", "assets/*"):
+        for f in glob.glob(os.path.join(xmls_dir, pattern)):
+            with open(f, "rb") as fh:
+                assets[os.path.basename(f)] = fh.read()
+    return assets
 
 
 class MJInferBase:
     def __init__(self, model_path):
 
         self.model = mujoco.MjModel.from_xml_string(
-            epath.Path(model_path).read_text(), assets=base.get_assets()
+            epath.Path(model_path).read_text(), assets=_get_assets_no_jax()
         )
         print(model_path)
 

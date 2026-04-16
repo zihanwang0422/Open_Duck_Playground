@@ -1,5 +1,22 @@
 # Open Duck Playground
 
+
+# Demo
+
+```bash
+ssh wzhduck@192.168.0.5
+
+~/miniconda3/bin/conda init bash
+
+source ~/.bashrc
+
+python scripts/v2_rl_walk_mujoco.py --duck_config_path ~/duck_config.json --onnx_model_path /home/wzhduck/Open_Duck_Mini_Runtime-2/BEST_WALK_ONNX_2.onnx
+```
+
+```bash
+sudo shutdown -h now
+```
+
 # Installation 
 
 Install uv

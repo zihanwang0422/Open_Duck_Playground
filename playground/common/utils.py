@@ -1,5 +1,4 @@
-import jax.numpy as jp
-import jax
+import numpy as np
 
 
 class LowPassActionFilter:
@@ -15,10 +14,10 @@ class LowPassActionFilter:
             1.0 / self.control_freq + 1.0 / self.cutoff_frequency
         )
 
-    def push(self, action: jax.Array) -> None:
-        self.current_action = jp.array(action)
+    def push(self, action) -> None:
+        self.current_action = np.array(action)
 
-    def get_filtered_action(self) -> jax.Array:
+    def get_filtered_action(self):
         self.last_action = (
             self.alpha * self.last_action + (1 - self.alpha) * self.current_action
         )
