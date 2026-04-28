@@ -10,7 +10,15 @@ ssh wzhduck@192.168.0.5
 
 source ~/.bashrc
 
-python scripts/v2_rl_walk_mujoco.py --duck_config_path ~/duck_config.json --onnx_model_path /home/wzhduck/Open_Duck_Mini_Runtime-2/BEST_WALK_ONNX_2.onnx
+cd Open_Duck_Mini_Runtime/
+pip install -e . --no-deps
+
+python find_soft_offsets.py
+cd Open_Duck_Mini_Runtime/scripts
+python v2_rl_walk_mujoco.py --duck_config_path ~/duck_config.json --onnx_model_path /home/wzhduck/Open_Duck_Mini_Runtime/BEST_WALK_ONNX_2.onnx
+
+cd ../..
+nano ./duck_config.json
 ```
 
 ```bash
@@ -24,6 +32,7 @@ Install uv
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
 
 # Training
 
